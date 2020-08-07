@@ -2,8 +2,10 @@ const path = require('path');
 const argv = require('minimist')(process.argv.slice(2));
 const RELEASE = argv.release;
 const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
+  plugins: [new MiniCssExtractPlugin()],
   mode: RELEASE ? 'production' : 'development',
   externals: {
     react: {

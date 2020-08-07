@@ -102,7 +102,8 @@ class EditorContainer extends React.Component {
       rowData: this.props.rowData,
       height: this.props.height,
       onBlur: this.commit,
-      onOverrideKeyDown: this.onKeyDown
+      onOverrideKeyDown: this.onKeyDown,
+      rowIdx: this.props.rowIdx
     };
 
     const CustomEditor = this.props.column.editor;

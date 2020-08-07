@@ -1,10 +1,10 @@
 {
-  "name": "react-data-grid-addons",
-  "version": "6.0.1",
+  "name": "evo-react-data-grid-addons",
+  "version": "6.0.4",
   "description": "A set of addons for react-data-grid",
   "scripts": {
-    "beforepublish": "node ../../ci/publish/replacePackageEntry react-data-grid-addons true",
-    "postpublish": "node ../../ci/publish/replacePackageEntry react-data-grid-addons",
+    "beforepublish_": "node ../../ci/publish/replacePackageEntry react-data-grid-addons true",
+    "postpublish_": "node ../../ci/publish/replacePackageEntry react-data-grid-addons",
     "test": "npm test"
   },
   "keywords": [
@@ -12,7 +12,13 @@
     "react-data-grid",
     "react-data-grid-addons"
   ],
-  "author": "Adazzle",
+  "publishConfig": {
+    "registry": "http://nexus.vdata/nexus/content/repositories/npm-internal/"
+  },
+  "files": [
+    "dist"
+  ],
+  "author": "Anton Leliuk",
   "license": "MIT",
   "devDependencies": {
     "jquery": "^2.1.1",

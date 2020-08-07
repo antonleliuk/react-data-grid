@@ -1,20 +1,26 @@
 {
-  "name": "react-data-grid",
-  "version": "6.0.1",
+  "name": "evo-react-data-grid",
+  "version": "6.0.4",
   "description": "Excel-like grid component built with React, with editors, keyboard navigation, copy & paste, and the like",
   "scripts": {
-    "beforepublish": "node ../../ci/publish/replacePackageEntry react-data-grid true",
-    "postpublish": "node ../../ci/publish/replacePackageEntry react-data-grid",
+    "beforepublish_": "node ../../ci/publish/replacePackageEntry react-data-grid true",
+    "postpublish_": "node ../../ci/publish/replacePackageEntry react-data-grid",
     "test": "npm test"
   },
+  "publishConfig": {
+    "registry": "http://nexus.vdata/nexus/content/repositories/npm-internal/"
+  },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "react",
     "react-data-grid",
     "data-grid",
     "core"
   ],
-  "repository": "adazzle/react-data-grid",
-  "author": "Adazzle",
+  "repository": "antonleliuk/react-data-grid",
+  "author": "Anton Leliuk",
   "license": "MIT",
   "peerDependencies": {
     "react": "^16.0.0",

@@ -283,13 +283,16 @@ class Canvas extends React.PureComponent {
     const customRowRendererProps = { ...otherProps, renderBaseRow: (p) => <Row ref={ref} {...p} /> };
     if (CustomRowRenderer.type === Row) {
       // In the case where Row is specified as the custom render, ensure the correct ref is passed
-      return <Row {...props} />;
+      const rowProps = CustomRowRenderer.props;
+      const newProps = Object.assign({}, props, rowProps);
+      return <Row {...newProps} />;
     }
     if (isFunction(CustomRowRenderer)) {
       return <CustomRowRenderer {...customRowRendererProps} />;
     }
     if (React.isValidElement(CustomRowRenderer)) {
-      return React.cloneElement(CustomRowRenderer, customRowRendererProps);
+      const rowProps = CustomRowRenderer.props;
+      return React.cloneElement(CustomRowRenderer, {...customRowRendererProps, ...rowProps});
     }
   }
 

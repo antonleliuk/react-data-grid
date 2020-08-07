@@ -5,6 +5,7 @@ import joinClasses from 'classnames';
 import Cell from './Cell';
 import createObjectWithProperties from './createObjectWithProperties';
 import { isFrozen } from './ColumnUtils';
+import { isFunction } from 'common/utils';
 require('../../../themes/react-data-grid-row.css');
 
 // The list of the propTypes that we want to include in the Row div
@@ -21,7 +22,7 @@ class Row extends React.Component {
     /** JS object represeting row data */
     row: PropTypes.object.isRequired,
     /** React component used to render cell content */
-    cellRenderer: PropTypes.func,
+    cellRenderer: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
     /** Object used to listen for cell events */
     cellMetaData: PropTypes.object,
     /** Determines whether row is selected or not */
@@ -31,7 +32,7 @@ class Row extends React.Component {
     /** Array of all rows that have been expanded */
     expandedRows: PropTypes.arrayOf(PropTypes.object),
     /** Space separated list of extra css classes to apply to row */
-    extraClasses: PropTypes.string,
+    extraClasses: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     /** Will force an update to the row if true */
     forceUpdate: PropTypes.bool,
     /** */
@@ -88,11 +89,12 @@ class Row extends React.Component {
     const { key, formatter } = column;
     const baseCellProps = { key: `${key}-${idx}`, idx: column.idx, rowIdx: idx, height: this.getRowHeight(), column, cellMetaData };
 
+    const cellValue = this.getCellValue(key || column.idx);
     const cellProps = {
       ref: (node) => {
         this[key] = node;
       },
-      value: this.getCellValue(key || column.idx),
+      value: cellValue,
       rowData: row,
       isRowSelected: isSelected,
       expandableOptions: this.getExpandableOptions(key),
@@ -102,7 +104,14 @@ class Row extends React.Component {
       lastFrozenColumnIndex
     };
 
-    return <CellRenderer {...baseCellProps} {...cellProps} />;
+    if (isFunction(CellRenderer)) {
+      return <CellRenderer {...baseCellProps} {...cellProps} />;
+    }
+    if (React.isValidElement(CellRenderer)) {
+      const passedCellProps = CellRenderer.props;
+      const finalCellProps = Object.assign({}, baseCellProps, cellProps, passedCellProps, {value: cellValue})
+      return React.cloneElement(CellRenderer, {...finalCellProps});
+    }
   };
 
   getCells = () => {
@@ -168,13 +177,19 @@ class Row extends React.Component {
   };
 
   render() {
+    let extraClassesValue = '';
+    if (isFunction(this.props.extraClasses)) {
+      extraClassesValue = this.props.extraClasses(this.props);
+    } else {
+      extraClassesValue = this.props.extraClasses;
+    }
     const className = joinClasses(
       'react-grid-Row',
       `react-grid-Row--${this.props.idx % 2 === 0 ? 'even' : 'odd'}`,
       {
         'row-selected': this.props.isSelected
       },
-      this.props.extraClasses,
+      extraClassesValue,
       { 'rdg-scrolling': this.props.isScrolling }
     );
 

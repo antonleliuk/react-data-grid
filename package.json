@@ -1,6 +1,7 @@
 {
-  "name": "react-data-grid",
-  "private": true,
+  "name": "evo-react-data-grid",
+  "version": "6.0.4",
+  "private": false,
   "description": "Data grid for React",
   "main": "src/index.js",
   "scripts": {
@@ -8,7 +9,7 @@
     "pretest": "npm run eslint",
     "test": "./node_modules/.bin/karma start ./config/karma.js --singleRun true --release true",
     "dev-test": "./node_modules/.bin/karma start ./config/karma.dev.js --singleRun false --debug true",
-    "postinstall": "lerna bootstrap",
+    "postinstall_": "lerna bootstrap",
     "build": "webpack --config ./config/webpack.config.prod.js --release true",
     "dev-server": "node webpack-dev-server.js",
     "beforepublish": "lerna run beforepublish",
@@ -20,8 +21,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/adazzle/react-data-grid.git"
+    "url": "git://github.com/antonleliuk/react-data-grid.git"
   },
+  "publishConfig": {
+    "registry": "http://nexus.vdata/nexus/content/repositories/npm-internal/"
+  },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "react",
     "grid",
@@ -89,7 +96,8 @@
     "vinyl-source-stream": "^0.1.1",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^1.16.2"
+    "webpack-dev-server": "^1.16.2",
+    "mini-css-extract-plugin": "0.9.0"
   },
   "author": "adazzle",
   "license": "MIT",
