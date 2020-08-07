@@ -1,6 +1,6 @@
 {
   "name": "evo-react-data-grid",
-  "version": "6.0.5",
+  "version": "6.0.6",
   "private": false,
   "description": "Data grid for React",
   "main": "src/index.js",
@@ -81,6 +81,7 @@
     "karma-mocha-reporter": "^2.2.5",
     "karma-webpack": "^3.0.5",
     "lerna": "^3.5.0",
+    "mini-css-extract-plugin": "0.9.0",
     "minimist": "^1.1.0",
     "mkdirp": "^0.5.1",
     "node-dir": "^0.1.12",
@@ -96,8 +97,7 @@
     "vinyl-source-stream": "^0.1.1",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^1.16.2",
-    "mini-css-extract-plugin": "0.9.0"
+    "webpack-dev-server": "^1.16.2"
   },
   "author": "adazzle",
   "license": "MIT",
