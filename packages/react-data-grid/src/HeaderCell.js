@@ -11,7 +11,7 @@ require('../../../themes/react-data-grid-header.css');
 
 function SimpleCellRenderer(objArgs) {
   const headerText = objArgs.column.rowType === 'header' ? objArgs.column.name : '';
-  return <div className="widget-HeaderCell__value">{headerText}</div>;
+  return <div title={headerText} className="widget-HeaderCell__value">{headerText}</div>;
 }
 
 class HeaderCell extends React.Component {
