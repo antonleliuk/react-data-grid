@@ -309,8 +309,14 @@ class InteractionMasks extends React.Component {
       return;
     }
 
-    const { key: cellKey } = getSelectedColumn({ selectedPosition, columns });
+    let column = getSelectedColumn({ selectedPosition, columns });
+    const { key: cellKey } = column;
     const { rowIdx: fromRow, value: textToCopy } = copiedPosition;
+
+    const updated = {}
+    updated['value'] = {}
+    updated['value'][cellKey] = textToCopy
+    updated['column'] = column
 
     if (isFunction(onCellCopyPaste)) {
       onCellCopyPaste({
@@ -322,7 +328,7 @@ class InteractionMasks extends React.Component {
       });
     }
 
-    onGridRowsUpdated(cellKey, toRow, toRow, { [cellKey]: textToCopy }, UpdateActions.COPY_PASTE, fromRow);
+    onGridRowsUpdated(cellKey, toRow, toRow, updated, UpdateActions.COPY_PASTE, fromRow);
   };
 
   isKeyboardNavigationEvent(e) {
@@ -608,11 +614,16 @@ class InteractionMasks extends React.Component {
         const fromRow = rowIdx < overRowIdx ? rowIdx : overRowIdx;
         const toRow = rowIdx > overRowIdx ? rowIdx : overRowIdx;
 
+        const updated = {}
+        updated['value'] = {}
+        updated['value'][cellKey] = value
+        updated['column'] = column
+
         if (isFunction(onCellsDragged)) {
           onCellsDragged({ cellKey, fromRow, toRow, value });
         }
         if (isFunction(onGridRowsUpdated)) {
-          onGridRowsUpdated(cellKey, fromRow, toRow, { [cellKey]: value }, UpdateActions.CELL_DRAG);
+          onGridRowsUpdated(cellKey, fromRow, toRow, updated, UpdateActions.CELL_DRAG);
         }
       }
       this.setState({

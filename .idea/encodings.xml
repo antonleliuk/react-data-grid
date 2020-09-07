@@ -11,5 +11,6 @@
     <file url="file://$PROJECT_DIR$/packages/react-data-grid/src/Canvas.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/packages/react-data-grid/src/HeaderCell.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/packages/react-data-grid/src/Row.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/packages/react-data-grid/src/masks/InteractionMasks.js" charset="UTF-8" />
   </component>
 </project>
