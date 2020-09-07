@@ -12,6 +12,14 @@ export default function shouldRowUpdate(nextProps, currentProps) {
     currentProps.expandedRows !== nextProps.expandedRows ||
     currentProps.canDrop !== nextProps.canDrop ||
     currentProps.forceUpdate === true ||
-    currentProps.extraClasses !== nextProps.extraClasses;
+    compareExtraClasses(currentProps, nextProps);
 }
 
+function compareExtraClasses(current, next) {
+  const extraClassesCurrent = current.extraClasses;
+  const extraClassesNext = next.extraClasses;
+  if (typeof extraClassesCurrent === 'function' && typeof extraClassesNext === 'function') {
+    return extraClassesCurrent(current) !== extraClassesNext(next)
+  }
+  return extraClassesCurrent !== extraClassesNext;
+}

@@ -288,11 +288,11 @@ class Canvas extends React.PureComponent {
       return <Row {...newProps} />;
     }
     if (isFunction(CustomRowRenderer)) {
-      return <CustomRowRenderer {...customRowRendererProps} />;
+      return <CustomRowRenderer { ...customRowRendererProps } />;
     }
     if (React.isValidElement(CustomRowRenderer)) {
       const rowProps = CustomRowRenderer.props;
-      return React.cloneElement(CustomRowRenderer, {...customRowRendererProps, ...rowProps});
+      return React.cloneElement(CustomRowRenderer, { ...customRowRendererProps, ...rowProps });
     }
   }
 

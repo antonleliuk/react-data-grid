@@ -109,8 +109,8 @@ class Row extends React.Component {
     }
     if (React.isValidElement(CellRenderer)) {
       const passedCellProps = CellRenderer.props;
-      const finalCellProps = Object.assign({}, baseCellProps, cellProps, passedCellProps, {value: cellValue})
-      return React.cloneElement(CellRenderer, {...finalCellProps});
+      const finalCellProps = Object.assign({}, baseCellProps, cellProps, passedCellProps, { value: cellValue });
+      return React.cloneElement(CellRenderer, { ...finalCellProps });
     }
   };
 

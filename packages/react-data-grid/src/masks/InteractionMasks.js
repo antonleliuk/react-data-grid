@@ -309,14 +309,14 @@ class InteractionMasks extends React.Component {
       return;
     }
 
-    let column = getSelectedColumn({ selectedPosition, columns });
+    const column = getSelectedColumn({ selectedPosition, columns });
     const { key: cellKey } = column;
     const { rowIdx: fromRow, value: textToCopy } = copiedPosition;
 
-    const updated = {}
-    updated['value'] = {}
-    updated['value'][cellKey] = textToCopy
-    updated['column'] = column
+    const updated = {};
+    updated.value = {};
+    updated.value[cellKey] = textToCopy;
+    updated.column = column;
 
     if (isFunction(onCellCopyPaste)) {
       onCellCopyPaste({
@@ -614,10 +614,10 @@ class InteractionMasks extends React.Component {
         const fromRow = rowIdx < overRowIdx ? rowIdx : overRowIdx;
         const toRow = rowIdx > overRowIdx ? rowIdx : overRowIdx;
 
-        const updated = {}
-        updated['value'] = {}
-        updated['value'][cellKey] = value
-        updated['column'] = column
+        const updated = {};
+        updated.value = {};
+        updated.value[cellKey] = value;
+        updated.column = column;
 
         if (isFunction(onCellsDragged)) {
           onCellsDragged({ cellKey, fromRow, toRow, value });
