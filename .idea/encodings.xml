@@ -5,14 +5,19 @@
     <file url="file://$PROJECT_DIR$/.idea/.gitignore" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/config/webpack.common.config.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/package.json" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/packages/common/constants/EventTypes.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/packages/common/editors/EditorContainer.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/packages/common/prop-shapes/CellMetaDataShape.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/packages/common/utils/RowComparer.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/packages/react-data-grid-addons/package.json" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/packages/react-data-grid/package.json" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/packages/react-data-grid/src/Canvas.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/packages/react-data-grid/src/Cell.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/packages/react-data-grid/src/HeaderCell.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/packages/react-data-grid/src/ReactDataGrid.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/packages/react-data-grid/src/Row.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/packages/react-data-grid/src/__tests__/RowComparer.spec.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/packages/react-data-grid/src/masks/CellMask.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/packages/react-data-grid/src/masks/InteractionMasks.js" charset="UTF-8" />
   </component>
 </project>

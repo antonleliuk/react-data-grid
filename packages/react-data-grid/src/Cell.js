@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import joinClasses from 'classnames';
-import { isFunction } from 'common/utils';
+import {isFunction} from 'common/utils';
 import SimpleCellFormatter from './formatters/SimpleCellFormatter';
 import createObjectWithProperties from './createObjectWithProperties';
 import CellAction from './CellAction';
 import CellExpand from './CellExpander';
 import ChildRowDeleteButton from './ChildRowDeleteButton';
-import { isFrozen } from './ColumnUtils';
+import {isFrozen} from './ColumnUtils';
+
 require('../../../themes/react-data-grid-cell.css');
 
 // The list of the propTypes that we want to include in the Cell div
@@ -133,13 +134,12 @@ class Cell extends React.PureComponent {
   };
 
   getStyle = () => {
-    const style = {
+    return {
       position: 'absolute',
       width: this.props.column.width,
       height: this.props.height,
       left: this.props.column.left
     };
-    return style;
   };
 
   getFormatter = () => {
@@ -172,7 +172,7 @@ class Cell extends React.PureComponent {
     const extraClasses = joinClasses({
       'row-selected': this.props.isRowSelected,
       editing: this.isEditorEnabled(),
-      'has-tooltip': this.props.tooltip ? true : false,
+      'has-tooltip': !!this.props.tooltip,
       'rdg-child-cell': this.props.expandableOptions && this.props.expandableOptions.subRowDetails && this.props.expandableOptions.treeDepth > 0,
       'last-column': this.props.column.isLastColumn
     });
@@ -310,7 +310,7 @@ class Cell extends React.PureComponent {
 
     let cellDeleter;
 
-    const isDeleteSubRowEnabled = this.props.cellMetaData.onDeleteSubRow ? true : false;
+    const isDeleteSubRowEnabled = !!this.props.cellMetaData.onDeleteSubRow;
 
     if (treeDepth > 0 && isExpandCell) {
       cellDeleter = <ChildRowDeleteButton treeDepth={treeDepth} cellHeight={this.props.height} siblingIndex={this.props.expandableOptions.subRowDetails.siblingIndex} numberSiblings={this.props.expandableOptions.subRowDetails.numberSiblings} onDeleteSubRow={this.onDeleteSubRow} isDeleteSubRowEnabled={isDeleteSubRowEnabled} />;
@@ -318,7 +318,7 @@ class Cell extends React.PureComponent {
 
     const tooltip = this.props.tooltip && (<span className="cell-tooltip-text">{this.props.tooltip}</span>);
     const classes = joinClasses('react-grid-Cell__value',
-      { 'cell-tooltip': this.props.tooltip ? true : false }
+      { 'cell-tooltip': !!this.props.tooltip }
     );
 
     return (

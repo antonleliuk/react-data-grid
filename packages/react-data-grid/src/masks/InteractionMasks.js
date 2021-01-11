@@ -217,6 +217,9 @@ class InteractionMasks extends React.Component {
         isEditorEnabled: true,
         firstEditorKeyPress: key,
         editorPosition: this.getEditorPosition()
+      }, () => {
+        const { eventBus } = this.props;
+        eventBus.dispatch(EventTypes.OPEN_EDITOR);
       });
     }
   };
@@ -226,6 +229,9 @@ class InteractionMasks extends React.Component {
       isEditorEnabled: false,
       firstEditorKeyPress: null,
       editorPosition: null
+    }, () => {
+      const { eventBus } = this.props;
+      eventBus.dispatch(EventTypes.CLOSE_EDITOR);
     });
   };
 

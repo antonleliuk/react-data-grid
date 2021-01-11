@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { deprecate } from 'react-is-deprecated';
+import {deprecate} from 'react-is-deprecated';
 import BaseGrid from './Grid';
 import CheckboxEditor from 'common/editors/CheckboxEditor';
 import RowUtils from './RowUtils';
-import { getColumn, getSize } from './ColumnUtils';
+import {getColumn, getSize} from './ColumnUtils';
 import KeyCodes from './KeyCodes';
-import { isFunction } from 'common/utils';
+import {isFunction} from 'common/utils';
 import SelectAll from './formatters/SelectAll';
-import { DEFINE_SORT } from 'common/cells/headerCells/SortableHeaderCell';
+import {DEFINE_SORT} from 'common/cells/headerCells/SortableHeaderCell';
+import {CellNavigationMode, EventTypes, HeaderRowType, UpdateActions} from 'common/constants';
+import {EventBus} from './masks';
+
 const ColumnMetrics = require('./ColumnMetrics');
-import { CellNavigationMode, EventTypes, UpdateActions, HeaderRowType } from 'common/constants';
-import { EventBus } from './masks';
 
 require('../../../themes/react-data-grid-core.css');
 require('../../../themes/react-data-grid-checkbox.css');
@@ -218,7 +219,9 @@ class ReactDataGrid extends React.Component {
     /** Called when the grid is scrolled */
     onScroll: PropTypes.func,
     /** The node where the editor portal should mount. */
-    editorPortalTarget: PropTypes.instanceOf(Element)
+    editorPortalTarget: PropTypes.instanceOf(Element),
+
+    subscribeOnEvents: PropTypes.func
   };
 
   static defaultProps = {
@@ -241,7 +244,8 @@ class ReactDataGrid extends React.Component {
     onBeforeEdit: () => { },
     minColumnWidth: 80,
     columnEquality: ColumnMetrics.sameColumn,
-    editorPortalTarget: document.body
+    editorPortalTarget: document.body,
+    subscribeOnEvents: (eventBus) => {}
   };
 
   constructor(props, context) {
@@ -264,6 +268,7 @@ class ReactDataGrid extends React.Component {
       window.addEventListener('mouseup', this.onWindowMouseUp);
     }
     this.metricsUpdated();
+    this.props.subscribeOnEvents(this.eventBus);
   }
 
   componentWillUnmount() {
@@ -323,8 +328,7 @@ class ReactDataGrid extends React.Component {
       totalWidth: totalWidth,
       minColumnWidth: metrics.minColumnWidth
     };
-    const updatedMetrics = ColumnMetrics.recalculate(currentMetrics);
-    return updatedMetrics;
+    return ColumnMetrics.recalculate(currentMetrics);
   };
 
   getColumn = (idx) => {
