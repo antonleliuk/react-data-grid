@@ -1,6 +1,6 @@
 {
   "name": "evo-react-data-grid",
-  "version": "6.0.9",
+  "version": "6.0.13",
   "private": false,
   "description": "Data grid for React",
   "main": "src/index.js",
